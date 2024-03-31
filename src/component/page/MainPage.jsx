@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import Button from "../ui/Button";
 import PostList from "../list/PostList";
-import data from "../../data.json";
+//import data from "../../data.json";
 
 const Wrapper = styled.div`
   width: calc(100%-32px);
@@ -26,7 +26,12 @@ const Container = styled.div`
 
 const MainPage = () => {
   const navigate = useNavigate();
-
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/posts")
+      .then((response) => response.json())
+      .then((json) => setData(json));
+  }, []);
   return (
     <Wrapper>
       <Container>

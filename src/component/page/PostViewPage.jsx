@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
-import data from "../../data.json";
 import Button from "../ui/Button";
 import TextInput from "../ui/TextInput";
 import CommentList from "../list/CommentList";
@@ -46,9 +45,13 @@ const CommentLabel = styled.p`
 const PostViewPage = () => {
   const navigate = useNavigate();
   const { postId } = useParams();
-  const post = data.find((item) => {
-    return item.id === Number(postId);
-  });
+  const [post, setPost] = useState([]);
+  useEffect(() => {
+    fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
+      .then((response) => response.json())
+      .then((json) => setPost(json));
+  }, [postId]);
+
   const [comment, setComment] = useState("");
 
   return (
