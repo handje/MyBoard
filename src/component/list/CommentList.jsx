@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import CommentListItem from "./CommentListItem";
-//post목록, postlistItem을 이용하여 화면에 뿌림
 
 const Wrapper = styled.div`
   display: flex;

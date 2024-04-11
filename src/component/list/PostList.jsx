@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import PostListItem from "./PostListItem";
-//post목록, postlistItem을 이용하여 화면에 뿌림
 
-const Wrapper = styled.div`
+import PostListItem from "./PostListItem";
+
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -12,6 +12,7 @@ const Wrapper = styled.div`
     margin-botton: 16px;
   }
 `;
+
 const PostList = (props) => {
   const { posts, onClickItem } = props;
   return (

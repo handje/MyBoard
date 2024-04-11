@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-//글 목록, 글 제목만 표시
+
 const Wrapper = styled.div`
   width: calc(100%-32px);
   padding: 16px;
@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   :hover {
     background: lightgrey;
   }
-  border: 1px red solid;
+  border: 1px grey solid;
 `;
 const TitleText = styled.p`
   font-size: 20px;

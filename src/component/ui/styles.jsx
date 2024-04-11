@@ -6,11 +6,11 @@ export const Header = styled.header`
   font-size: 50px;
   font-weight: bold;
   text-align: center;
-  background-color: blue;
   cursor: pointer;
+  background-color: grey;
 `;
 
-export const Wrapper = styled.body`
+export const Wrapper = styled.div`
   width: calc(100%-32px);
   padding: 16px;
   display: flex;
@@ -23,7 +23,6 @@ export const Wrapper = styled.body`
 export const Container = styled.div`
   width: 100%;
   max-width: 720px;
-  border: 1px blue solid;
   :not(:last-child) {
     margin-bottom: 16px;
   }
