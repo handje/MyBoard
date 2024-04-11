@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import TextInput from "../ui/TextInput";
 import Button from "../ui/Button";
 import { Wrapper, Container } from "../ui/styles";
+import data from "../../data.json";
 
-const PostWritePage = (props) => {
+const PostUpdatePage = (props) => {
   const navigate = useNavigate();
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState();
-
+  const { postId } = useParams();
+  const [post] = data.filter((data) => data.id === Number(postId));
+  const [title, setTitle] = useState(post.title);
+  const [content, setContent] = useState(post.content);
   return (
     <Wrapper>
       <Container>
@@ -37,4 +39,4 @@ const PostWritePage = (props) => {
     </Wrapper>
   );
 };
-export default PostWritePage;
+export default PostUpdatePage;

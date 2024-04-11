@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   :hover {
     background: lightgrey;
   }
+  border: 1px red solid;
 `;
 const TitleText = styled.p`
   font-size: 20px;

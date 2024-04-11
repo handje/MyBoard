@@ -1,24 +1,23 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import styled from "styled-components";
+
 import PostWritePage from "./component/page/PostWritePage";
 import PostViewPage from "./component/page/PostViewPage";
 import MainPage from "./component/page/MainPage";
+import PostUpdatePage from "./component/page/PostUpdatePage";
 
-const MainTitleText = styled.p`
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-`;
+import Layout from "./component/page/Layout";
 
 function App() {
   return (
     <BrowserRouter>
-      <MainTitleText>미니블로그</MainTitleText>
       <Routes>
-        <Route index element={<MainPage />} />
-        <Route path="post-write" element={<PostWritePage />} />
-        <Route path="post/:postId" element={<PostViewPage />} />
+        <Route element={<Layout />}>
+          <Route path="/" element={<MainPage />} />
+          <Route path="post/:postId" element={<PostViewPage />} />
+          <Route path="post-write" element={<PostWritePage />} />
+          <Route path="post-write/:postId" element={<PostUpdatePage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

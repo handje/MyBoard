@@ -5,24 +5,10 @@ import styled from "styled-components";
 import Button from "../ui/Button";
 import TextInput from "../ui/TextInput";
 import CommentList from "../list/CommentList";
+import { Wrapper } from "../ui/styles";
+import data from "../../data.json";
+import { Container } from "../ui/styles";
 
-const Wrapper = styled.div`
-  width: calc(100%-32px);
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  }
-`;
-const Container = styled.div`
-  width: 100%;
-  max-width: 720px;
-
-  :not(:last-child) {
-    margin-bottom: 16px;
-  }
-`;
 const PostContainer = styled.div`
   padding: 8px 16x;
   border: 1px solid grey;
@@ -45,13 +31,7 @@ const CommentLabel = styled.p`
 const PostViewPage = () => {
   const navigate = useNavigate();
   const { postId } = useParams();
-  const [post, setPost] = useState([]);
-  useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
-      .then((response) => response.json())
-      .then((json) => setPost(json));
-  }, [postId]);
-
+  const [post] = data.filter((data) => data.id === Number(postId));
   const [comment, setComment] = useState("");
 
   return (
@@ -67,6 +47,12 @@ const PostViewPage = () => {
           <TitleText>{post.title}</TitleText>
           <ContentText>{post.content}</ContentText>
         </PostContainer>
+        <Button
+          title="수정하기"
+          onClick={() => {
+            navigate(`/post-write/${postId}`);
+          }}
+        />
         <CommentLabel>댓글</CommentLabel>
         <CommentList comments={post.comments} />
         <TextInput
