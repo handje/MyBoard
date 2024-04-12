@@ -5,7 +5,6 @@ import styled from "styled-components";
 import Button from "../ui/Button";
 import TextInput from "../ui/TextInput";
 import CommentList from "../list/CommentList";
-import data from "../../data.json";
 
 const PostContainer = styled.div`
   padding: 8px 16x;
@@ -32,8 +31,18 @@ const CommentLabel = styled.p`
 const PostViewPage = () => {
   const navigate = useNavigate();
   const { postId } = useParams();
-  const [post] = data.filter((data) => data.id === Number(postId));
-  const [comment, setComment] = useState("");
+  const [postData, setPostData] = useState([]);
+  const [newComment, setNewComment] = useState("");
+
+  useEffect(() => {
+    const localData = localStorage.getItem("test2");
+    if (localData) {
+      const [dataList] = JSON.parse(localData).filter(
+        (post) => post.id === parseInt(postId)
+      );
+      setPostData(dataList);
+    }
+  }, []);
 
   return (
     <>
@@ -42,24 +51,20 @@ const PostViewPage = () => {
         onClick={() => {
           navigate("/");
         }}
-      />{" "}
-      <Button
-        title="수정하기"
-        onClick={() => {
-          navigate(`/post-write/${postId}`);
-        }}
       />
+      <Button title="수정하기" />
+      <Button title="삭제하기" />
       <PostContainer>
-        <TitleText>{post.title}</TitleText>
-        <ContentText>{post.content}</ContentText>
+        <TitleText>{postData.title}</TitleText>
+        <ContentText>{postData.content}</ContentText>
       </PostContainer>
       <CommentLabel>댓글</CommentLabel>
-      <CommentList comments={post.comments} />
+      <CommentList comments={postData.comments} />
       <TextInput
         height={40}
-        value={comment}
+        value={newComment}
         onChange={(event) => {
-          setComment(event.target.value);
+          setNewComment(event.target.value);
         }}
       />
       <Button

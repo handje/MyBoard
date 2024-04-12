@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import TextInput from "../ui/TextInput";
@@ -8,11 +8,23 @@ import data from "../../data.json";
 const PostUpdatePage = () => {
   const navigate = useNavigate();
   const { postId } = useParams();
-  const [post] = data.filter((data) => data.id === Number(postId));
-  const [title, setTitle] = useState(post.title);
-  const [content, setContent] = useState(post.content);
+  const [post, setPost] = useState({});
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
+  useEffect(() => {
+    const localData = localStorage.getItem("test2");
+    if (localData) {
+      setPost(
+        JSON.parse(localData).filter((post) => post.id === parseInt(postId))
+      );
+      setTitle(post.title);
+      setContent(post.content);
+    }
+  }, []);
+
   return (
-    <>
+    <form>
       <TextInput
         height={20}
         value={title}
@@ -33,7 +45,7 @@ const PostUpdatePage = () => {
           navigate("/");
         }}
       />
-    </>
+    </form>
   );
 };
 export default PostUpdatePage;

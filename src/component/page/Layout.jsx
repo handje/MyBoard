@@ -34,7 +34,7 @@ const Layout = () => {
   const navigate = useNavigate();
   return (
     <>
-      <Header>BLOG</Header>
+      <Header onClick={() => navigate("/")}>BLOG</Header>
       <Wrapper>
         <Container>
           <Outlet />
