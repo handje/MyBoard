@@ -11,9 +11,3 @@
 ![스크린샷(26)](https://github.com/handje/MyBoard/assets/57988006/f515c24d-d7fe-4c8d-9b02-96b95dda3f0d)
 ![스크린샷(27)](https://github.com/handje/MyBoard/assets/57988006/7d7a9be0-9ab7-46aa-8f5a-a3ecb91bd213)
 
-- [x] 기능정의
-- [x] 와이어프레임 제작
-- [x] 게시판 화면 개발
-- [ ] api적용
-- [ ] db적용
-- [ ] test
