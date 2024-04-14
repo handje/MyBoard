@@ -8,7 +8,7 @@ const PostWritePage = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState();
-  const postList = JSON.parse(localStorage.getItem("test2"));
+  const postList = JSON.parse(localStorage.getItem("test"));
 
   //useCallback으로 바꿀방법???????????????????
   const onSubmit = (e) => {
@@ -19,7 +19,7 @@ const PostWritePage = () => {
       content: content,
       comments: [],
     };
-    localStorage.setItem("test2", JSON.stringify([...postList, newPost]));
+    localStorage.setItem("test", JSON.stringify([...postList, newPost]));
     navigate("/");
   };
 

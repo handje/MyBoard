@@ -33,14 +33,26 @@ const PostViewPage = () => {
   const { postId } = useParams();
   const [newComment, setNewComment] = useState("");
 
-  const postList = JSON.parse(localStorage.getItem("test2"));
+  const postList = JSON.parse(localStorage.getItem("test"));
   const postIndex = postList.findIndex((item) => item.id === parseInt(postId));
   const post = postList[postIndex];
 
   const deletePost = () => {
     postList.splice(postIndex, 1);
-    localStorage.setItem("test2", JSON.stringify(postList));
+    localStorage.setItem("test", JSON.stringify(postList));
     navigate("/");
+  };
+
+  const createComment = (e) => {
+    e.preventDefault();
+    const comment = {
+      id: parseInt(postId) * 10 + post.comments.length + 1,
+      content: newComment,
+    };
+    post.comments.push(comment);
+    postList.splice(postIndex, 1);
+    localStorage.setItem("test", JSON.stringify([...postList, post]));
+    setNewComment("");
   };
 
   return (
@@ -57,24 +69,21 @@ const PostViewPage = () => {
       />
       <Button title="삭제하기" onClick={deletePost} />
       <PostContainer>
-        <TitleText>{post.title}</TitleText>
-        <ContentText>{post.content}</ContentText>
+        <TitleText>{post?.title}</TitleText>
+        <ContentText>{post?.content}</ContentText>
       </PostContainer>
-      <CommentLabel>댓글</CommentLabel>
-      <CommentList comments={post.comments} />
-      <TextInput
-        height={40}
-        value={newComment}
-        onChange={(event) => {
-          setNewComment(event.target.value);
-        }}
-      />
-      <Button
-        title="댓글 작성하기"
-        onClick={() => {
-          navigate("/");
-        }}
-      />
+      <form onSubmit={createComment}>
+        <CommentLabel>댓글</CommentLabel>
+        <CommentList comments={post?.comments} />
+        <TextInput
+          height={40}
+          value={newComment}
+          onChange={(event) => {
+            setNewComment(event.target.value);
+          }}
+        />
+        <Button title="댓글 작성하기" />
+      </form>
     </>
   );
 };

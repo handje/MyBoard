@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import TextInput from "../ui/TextInput";
@@ -8,7 +8,7 @@ const PostUpdatePage = () => {
   const navigate = useNavigate();
   const { postId } = useParams();
 
-  const postList = JSON.parse(localStorage.getItem("test2"));
+  const postList = JSON.parse(localStorage.getItem("test"));
   const postIndex = postList.findIndex((item) => item.id === parseInt(postId));
   const post = postList[postIndex];
 
@@ -24,7 +24,7 @@ const PostUpdatePage = () => {
       comments: post.comments,
     };
     postList.splice(postIndex, 1);
-    localStorage.setItem("test2", JSON.stringify([...postList, updatePost]));
+    localStorage.setItem("test", JSON.stringify([...postList, updatePost]));
     navigate(`/post/${postId}`);
   };
 
