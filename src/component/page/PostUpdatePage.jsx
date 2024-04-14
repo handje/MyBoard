@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import TextInput from "../ui/TextInput";
 import Button from "../ui/Button";
-import data from "../../data.json";
 
 const PostUpdatePage = () => {
   const navigate = useNavigate();

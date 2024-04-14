@@ -31,22 +31,7 @@ const CommentLabel = styled.p`
 const PostViewPage = () => {
   const navigate = useNavigate();
   const { postId } = useParams();
-<<<<<<< HEAD
   const [newComment, setNewComment] = useState("");
-=======
-  const [postData, setPostData] = useState([]);
-  const [newComment, setNewComment] = useState("");
-
-  useEffect(() => {
-    const localData = localStorage.getItem("test");
-    if (localData) {
-      const [dataList] = JSON.parse(localData).filter(
-        (post) => post.id === Number(postId)
-      );
-      setPostData(dataList);
-    }
-  }, [postId]);
->>>>>>> a0a6e6f06718446ee2f8c8f853e367fe223192f8
 
   const postList = JSON.parse(localStorage.getItem("test2"));
   const postIndex = postList.findIndex((item) => item.id === parseInt(postId));
@@ -57,6 +42,7 @@ const PostViewPage = () => {
     localStorage.setItem("test2", JSON.stringify(postList));
     navigate("/");
   };
+
   return (
     <>
       <Button
@@ -71,11 +57,11 @@ const PostViewPage = () => {
       />
       <Button title="삭제하기" onClick={deletePost} />
       <PostContainer>
-        <TitleText>{postData.title}</TitleText>
-        <ContentText>{postData.content}</ContentText>
+        <TitleText>{post.title}</TitleText>
+        <ContentText>{post.content}</ContentText>
       </PostContainer>
       <CommentLabel>댓글</CommentLabel>
-      <CommentList comments={postData.comments} />
+      <CommentList comments={post.comments} />
       <TextInput
         height={40}
         value={newComment}
