@@ -6,6 +6,7 @@ import PostList from "../list/PostList";
 
 const MainPage = () => {
   const navigate = useNavigate();
+<<<<<<< HEAD
   // const [postList, setPostList] = useState([]);
   const postList = JSON.parse(localStorage.getItem("test2")).sort(
     (a, b) => parseInt(a.id) - parseInt(b.id)
@@ -20,6 +21,19 @@ const MainPage = () => {
   //     setPostList(dataList);
   //   }
   // }, []);
+=======
+  const [postList, setPostList] = useState([]);
+
+  useEffect(() => {
+    const localData = localStorage.getItem("test");
+    if (localData) {
+      const dataList = JSON.parse(localData).sort(
+        (a, b) => parseInt(a.id) - parseInt(b.id)
+      );
+      setPostList(dataList);
+    }
+  }, []);
+>>>>>>> a0a6e6f06718446ee2f8c8f853e367fe223192f8
 
   return (
     <>
