@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import TextInput from "../ui/TextInput";
 import Button from "../ui/Button";
@@ -8,19 +8,7 @@ const PostWritePage = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState();
-  const [postList, setPostList] = useState(() => {
-    const localData = localStorage.getItem("test2");
-    if (localData) {
-      return JSON.parse(localData);
-    } else {
-      return [];
-    }
-  });
-
-  // useEffect(() => {
-  //   console.log("save local");
-  //   localStorage.setItem("test2", JSON.stringify(postList));
-  // }, [postList]);
+  const postList = JSON.parse(localStorage.getItem("test2"));
 
   //useCallback으로 바꿀방법???????????????????
   const onSubmit = (e) => {
@@ -31,7 +19,6 @@ const PostWritePage = () => {
       content: content,
       comments: [],
     };
-    // setPostList([...postList, newPost]);
     localStorage.setItem("test2", JSON.stringify([...postList, newPost]));
     navigate("/");
   };
@@ -50,6 +37,12 @@ const PostWritePage = () => {
         value={content}
         onChange={(event) => {
           setContent(event.target.value);
+        }}
+      />
+      <Button
+        title="뒤로 가기"
+        onClick={() => {
+          navigate("/");
         }}
       />
       <Button title="글 작성하기" />

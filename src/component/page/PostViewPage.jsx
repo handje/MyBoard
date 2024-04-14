@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
@@ -31,19 +31,17 @@ const CommentLabel = styled.p`
 const PostViewPage = () => {
   const navigate = useNavigate();
   const { postId } = useParams();
-  const [postData, setPostData] = useState([]);
   const [newComment, setNewComment] = useState("");
 
-  useEffect(() => {
-    const localData = localStorage.getItem("test2");
-    if (localData) {
-      const [dataList] = JSON.parse(localData).filter(
-        (post) => post.id === parseInt(postId)
-      );
-      setPostData(dataList);
-    }
-  }, []);
+  const postList = JSON.parse(localStorage.getItem("test2"));
+  const postIndex = postList.findIndex((item) => item.id === parseInt(postId));
+  const post = postList[postIndex];
 
+  const deletePost = () => {
+    postList.splice(postIndex, 1);
+    localStorage.setItem("test2", JSON.stringify(postList));
+    navigate("/");
+  };
   return (
     <>
       <Button
@@ -52,14 +50,17 @@ const PostViewPage = () => {
           navigate("/");
         }}
       />
-      <Button title="수정하기" />
-      <Button title="삭제하기" />
+      <Button
+        title="수정하기"
+        onClick={() => navigate(`/post-write/${postId}`)}
+      />
+      <Button title="삭제하기" onClick={deletePost} />
       <PostContainer>
-        <TitleText>{postData.title}</TitleText>
-        <ContentText>{postData.content}</ContentText>
+        <TitleText>{post.title}</TitleText>
+        <ContentText>{post.content}</ContentText>
       </PostContainer>
       <CommentLabel>댓글</CommentLabel>
-      <CommentList comments={postData.comments} />
+      <CommentList comments={post.comments} />
       <TextInput
         height={40}
         value={newComment}

@@ -8,43 +8,50 @@ import data from "../../data.json";
 const PostUpdatePage = () => {
   const navigate = useNavigate();
   const { postId } = useParams();
-  const [post, setPost] = useState({});
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
 
-  useEffect(() => {
-    const localData = localStorage.getItem("test2");
-    if (localData) {
-      setPost(
-        JSON.parse(localData).filter((post) => post.id === parseInt(postId))
-      );
-      setTitle(post.title);
-      setContent(post.content);
-    }
-  }, []);
+  const postList = JSON.parse(localStorage.getItem("test2"));
+  const postIndex = postList.findIndex((item) => item.id === parseInt(postId));
+  const post = postList[postIndex];
+
+  const [title, setTitle] = useState(post ? post.title : "");
+  const [content, setContent] = useState(post ? post.content : "");
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const updatePost = {
+      id: parseInt(postId),
+      title: title,
+      content: content,
+      comments: post.comments,
+    };
+    postList.splice(postIndex, 1);
+    localStorage.setItem("test2", JSON.stringify([...postList, updatePost]));
+    navigate(`/post/${postId}`);
+  };
 
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <TextInput
         height={20}
         value={title}
-        onChange={(event) => {
-          setTitle(event.target.value);
+        onChange={(e) => {
+          setTitle(e.target.value);
         }}
       />
       <TextInput
         height={480}
         value={content}
-        onChange={(event) => {
-          setContent(event.target.value);
+        onChange={(e) => {
+          setContent(e.target.value);
         }}
       />
       <Button
-        title="글 작성하기"
+        title="뒤로 가기"
         onClick={() => {
-          navigate("/");
+          navigate(`/post/${postId}`);
         }}
       />
+      <Button title="글 수정하기" />
     </form>
   );
 };
