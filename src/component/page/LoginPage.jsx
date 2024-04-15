@@ -4,14 +4,34 @@ import styled from "styled-components";
 
 import Button from "../ui/Button";
 
+//relative: 자기 자신을 기준으로,
 const LoginForm = styled.form`
-  border: 1px solid red;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  .button {
-  }
+  position: relative;
+  z-index: 1;
+  max-width: 360px;
+  margin: 100px auto;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+`;
+
+const StyledInput = styled.input`
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  padding: 15px;
+  font-size: 14px;
+`;
+const StyledButton = styled.button`
+  text-transform: uppercase;
+  background: grey;
+  width: 100%;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+
+  &:hover {
+    background: dimgray;
 `;
 
 const LoginPage = () => {
@@ -21,7 +41,7 @@ const LoginPage = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const users = JSON.parse(localStorage.getItem("user")).filter(
+    const users = JSON.parse(localStorage.getItem("users"))?.filter(
       (user) => user.id === id && user.pwd === pwd
     );
     if (users.length) {
@@ -34,7 +54,7 @@ const LoginPage = () => {
   };
   return (
     <LoginForm onSubmit={onSubmit}>
-      <input
+      <StyledInput
         type="text"
         placeholder="ID"
         value={id}
@@ -42,7 +62,7 @@ const LoginPage = () => {
           setId(e.target.value);
         }}
       />
-      <input
+      <StyledInput
         type="password"
         placeholder="PWD"
         value={pwd}
@@ -50,7 +70,7 @@ const LoginPage = () => {
           setPwd(e.target.value);
         }}
       />
-      <Button title="login" />
+      <StyledButton>login</StyledButton>
     </LoginForm>
   );
 };

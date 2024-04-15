@@ -7,7 +7,7 @@ import PostList from "../list/PostList";
 const MainPage = () => {
   const navigate = useNavigate();
 
-  const postList = JSON.parse(localStorage.getItem("test")).sort(
+  const postList = JSON.parse(localStorage.getItem("test"))?.sort(
     (a, b) => parseInt(a.id) - parseInt(b.id)
   );
   return (

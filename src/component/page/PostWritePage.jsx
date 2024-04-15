@@ -8,7 +8,7 @@ const PostWritePage = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState();
-  const postList = JSON.parse(localStorage.getItem("test"));
+  const postList = JSON.parse(localStorage.getItem("test")) ?? [];
 
   //useCallback으로 바꿀방법???????????????????
   const onSubmit = (e) => {
