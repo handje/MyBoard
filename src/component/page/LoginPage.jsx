@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import Button from "../ui/Button";
-
 //relative: 자기 자신을 기준으로,
 const LoginForm = styled.form`
   position: relative;
@@ -41,17 +39,21 @@ const LoginPage = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const users = JSON.parse(localStorage.getItem("users"))?.filter(
+    const users = JSON.parse(localStorage.getItem("users")) ?? [];
+    const [loginUser] = users.filter(
       (user) => user.id === id && user.pwd === pwd
     );
-    if (users.length) {
-      navigate("/post");
+
+    if (loginUser) {
+      localStorage.setItem("loginUser", loginUser.id);
+      navigate("/");
     } else {
       alert("ID, PassWord 확인해주세요.");
       setId("");
       setPwd("");
     }
   };
+
   return (
     <LoginForm onSubmit={onSubmit}>
       <StyledInput

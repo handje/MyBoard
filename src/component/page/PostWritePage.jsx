@@ -20,7 +20,7 @@ const PostWritePage = () => {
       comments: [],
     };
     localStorage.setItem("test", JSON.stringify([...postList, newPost]));
-    navigate("/post");
+    navigate("/");
   };
 
   return (
@@ -42,7 +42,7 @@ const PostWritePage = () => {
       <Button
         title="뒤로 가기"
         onClick={() => {
-          navigate("/post");
+          navigate("/");
         }}
       />
       <Button title="글 작성하기" />

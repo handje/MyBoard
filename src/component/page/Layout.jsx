@@ -2,6 +2,8 @@ import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+import LoginPage from "../page/LoginPage";
+
 export const Header = styled.header`
   position: sticky;
   top: 0;
@@ -32,13 +34,12 @@ export const Container = styled.div`
 
 const Layout = () => {
   const navigate = useNavigate();
+  const user = localStorage.getItem("loginUser");
   return (
     <>
       <Header onClick={() => navigate("/")}>BLOG</Header>
       <Wrapper>
-        <Container>
-          <Outlet />
-        </Container>
+        <Container>{user ? <Outlet /> : <LoginPage />}</Container>
       </Wrapper>
     </>
   );
