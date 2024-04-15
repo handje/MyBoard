@@ -7,6 +7,7 @@ import LoginPage from "../page/LoginPage";
 export const Header = styled.header`
   position: sticky;
   top: 0;
+  color: #ffffff;
   font-size: 50px;
   font-weight: bold;
   text-align: center;

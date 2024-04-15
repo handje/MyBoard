@@ -7,6 +7,8 @@ const StyledTextarea = styled.textarea`
   padding:16px;
   font-size: 16px;
   line-height: 20px;
+  background: #f2f2f2;
+  outline: 0;
 `;
 
 const TextInput = (props) => {
