@@ -40,7 +40,7 @@ const PostViewPage = () => {
   const deletePost = () => {
     postList.splice(postIndex, 1);
     localStorage.setItem("test", JSON.stringify(postList));
-    navigate("/");
+    navigate("/post");
   };
 
   const createComment = (e) => {
@@ -60,7 +60,7 @@ const PostViewPage = () => {
       <Button
         title="뒤로 가기"
         onClick={() => {
-          navigate("/");
+          navigate("/post");
         }}
       />
       <Button
