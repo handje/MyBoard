@@ -1,6 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
+const MutiLineInput = (props) => {
+  const { height, value, onChange } = props;
+  return <StyledTextarea height={height} onChange={onChange} value={value} />;
+};
+
 const StyledTextarea = styled.textarea`
   width: calc(100%-32px);
   ${(props) => props.height && `height:${props.height}px;`}
@@ -11,8 +16,4 @@ const StyledTextarea = styled.textarea`
   outline: 0;
 `;
 
-const TextInput = (props) => {
-  const { height, value, onChange } = props;
-  return <StyledTextarea height={height} onChange={onChange} value={value} />;
-};
-export default TextInput;
+export default MutiLineInput;

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
-import TextInput from "../ui/TextInput";
+import Form from "../ui/Form";
+import Input from "../ui/Input";
+import MutiLineInput from "../ui/MutiLineInput";
 import Button from "../ui/Button";
 
 const PostWritePage = () => {
@@ -24,29 +27,38 @@ const PostWritePage = () => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <TextInput
-        height={20}
+    <Form onSubmit={onSubmit}>
+      <Input
         value={title}
         onChange={(event) => {
           setTitle(event.target.value);
         }}
       />
-      <TextInput
+      <MutiLineInput
         height={480}
         value={content}
         onChange={(event) => {
           setContent(event.target.value);
         }}
       />
-      <Button
-        title="뒤로 가기"
-        onClick={() => {
-          navigate("/");
-        }}
-      />
-      <Button title="글 작성하기" />
-    </form>
+      <ButtonContainer>
+        <Button
+          title="뒤로 가기"
+          onClick={() => {
+            navigate("/");
+          }}
+        />
+        <Button title="글 작성하기" />
+      </ButtonContainer>
+    </Form>
   );
 };
+
+const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin: 0;
+`;
+
 export default PostWritePage;

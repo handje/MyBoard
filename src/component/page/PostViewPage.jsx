@@ -3,30 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import Button from "../ui/Button";
-import TextInput from "../ui/TextInput";
+import Input from "../ui/Input";
 import CommentList from "../list/CommentList";
-
-const PostContainer = styled.div`
-  padding: 8px 16x;
-  border: 1px solid grey;
-  border-radius: 8px;
-`;
-
-const TitleText = styled.p`
-  font-size: 28px;
-  font-weight: 500;
-`;
-
-const ContentText = styled.p`
-  font-size: 20px;
-  line-height: 32px;
-  white-space: pre-wrap;
-`;
-
-const CommentLabel = styled.p`
-  font-size: 16px;
-  font-weight: 500;
-`;
 
 const PostViewPage = () => {
   const navigate = useNavigate();
@@ -72,20 +50,47 @@ const PostViewPage = () => {
         <TitleText>{post?.title}</TitleText>
         <ContentText>{post?.content}</ContentText>
       </PostContainer>
-      <form onSubmit={createComment}>
-        <CommentLabel>댓글</CommentLabel>
-        <CommentList comments={post?.comments} />
-        <TextInput
-          height={40}
+      <CommentLabel>댓글</CommentLabel>
+      <CommentList comments={post?.comments} />
+      <StyledForm onSubmit={createComment}>
+        <Input
+          type="text"
           value={newComment}
           onChange={(event) => {
             setNewComment(event.target.value);
           }}
         />
         <Button title="댓글 작성하기" />
-      </form>
+      </StyledForm>
     </>
   );
 };
+
+const PostContainer = styled.div`
+  padding: 8px 16x;
+  border: 1px solid grey;
+  border-radius: 8px;
+`;
+
+const TitleText = styled.p`
+  font-size: 28px;
+  font-weight: 500;
+`;
+
+const ContentText = styled.p`
+  font-size: 20px;
+  line-height: 32px;
+  white-space: pre-wrap;
+`;
+
+const CommentLabel = styled.p`
+  font-size: 16px;
+  font-weight: 500;
+`;
+
+const StyledForm = styled.form`
+  display: flex;
+  align-items: center;
+`;
 
 export default PostViewPage;
