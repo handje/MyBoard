@@ -14,11 +14,15 @@ const Input = (props) => {
 };
 
 const StyledInput = styled.input`
-  outline: 0;
-  background: #f2f2f2;
-  width: 100%;
-  padding: 15px;
-  font-size: 14px;
+  width: calc(100% - 32px);
+  ${(props) =>
+    props.height &&
+    `
+      height: ${props.height}px;
+  `}
+  padding: 16px;
+  font-size: 16px;
+  line-height: 20px;
 `;
 
 export default Input;

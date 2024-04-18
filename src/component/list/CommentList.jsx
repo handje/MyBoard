@@ -1,24 +1,16 @@
 import React from "react";
-import styled from "styled-components";
+
+import { ListWrapper } from "../../styles";
 import CommentListItem from "./CommentListItem";
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  :not(:last-child) {
-    margin-botton: 16px;
-  }
-`;
 const CommentList = (props) => {
   const { comments } = props;
   return (
-    <Wrapper>
+    <ListWrapper>
       {comments?.map((comment) => {
         return <CommentListItem key={comment.id} comment={comment} />;
       })}
-    </Wrapper>
+    </ListWrapper>
   );
 };
 export default CommentList;

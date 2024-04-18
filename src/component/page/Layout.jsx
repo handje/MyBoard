@@ -10,11 +10,7 @@ const Layout = () => {
   return (
     <>
       <Header onClick={() => navigate("/")}>BLOG</Header>
-      <Wrapper className="wrapper">
-        <Container className="container">
-          {user ? <Outlet /> : <LoginPage />}
-        </Container>
-      </Wrapper>
+      {user ? <Outlet /> : <LoginPage />}
     </>
   );
 };
@@ -28,25 +24,6 @@ const Header = styled.header`
   text-align: center;
   cursor: pointer;
   background-color: grey;
-`;
-
-const Wrapper = styled.div`
-  width: calc(100%-32px);
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  };
-
-`;
-
-const Container = styled.div`
-  width: 100%;
-  max-width: 720px;
-  :not(:last-child) {
-    margin-bottom: 16px;
-  }
 `;
 
 export default Layout;

@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import Input from "../ui/Input";
 import Button from "../ui/Button";
+import { Wrapper, Container } from "../../styles";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -28,29 +29,32 @@ const LoginPage = () => {
   };
 
   return (
-    <LoginForm onSubmit={onSubmit}>
-      <Input
-        type="text"
-        placeholder="ID"
-        value={id}
-        onChange={(e) => {
-          setId(e.target.value);
-        }}
-      />
-      <Input
-        type="password"
-        placeholder="PWD"
-        value={pwd}
-        onChange={(e) => {
-          setPwd(e.target.value);
-        }}
-      />
-      <Button title="login" width={100} />
-    </LoginForm>
+    <Wrapper>
+      <Container>
+        <LoginForm onSubmit={onSubmit}>
+          <Input
+            type="text"
+            placeholder="ID"
+            value={id}
+            onChange={(e) => {
+              setId(e.target.value);
+            }}
+          />
+          <Input
+            type="password"
+            placeholder="PWD"
+            value={pwd}
+            onChange={(e) => {
+              setPwd(e.target.value);
+            }}
+          />
+          <Button title="login" width={100} />
+        </LoginForm>
+      </Container>
+    </Wrapper>
   );
 };
 
-//relative: 자기 자신을 기준으로,
 const LoginForm = styled.form`
   position: relative;
   z-index: 1;

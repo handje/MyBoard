@@ -4,6 +4,8 @@ import styled from "styled-components";
 
 import Button from "../ui/Button";
 import Input from "../ui/Input";
+import Form from "../ui/Form";
+import { Wrapper, Container } from "../../styles";
 import CommentList from "../list/CommentList";
 
 const PostViewPage = () => {
@@ -34,40 +36,42 @@ const PostViewPage = () => {
   };
 
   return (
-    <>
-      <Button
-        title="뒤로 가기"
-        onClick={() => {
-          navigate("/");
-        }}
-      />
-      <Button
-        title="수정하기"
-        onClick={() => navigate(`/post-write/${postId}`)}
-      />
-      <Button title="삭제하기" onClick={deletePost} />
-      <PostContainer>
-        <TitleText>{post?.title}</TitleText>
-        <ContentText>{post?.content}</ContentText>
-      </PostContainer>
-      <CommentLabel>댓글</CommentLabel>
-      <CommentList comments={post?.comments} />
-      <StyledForm onSubmit={createComment}>
-        <Input
-          type="text"
-          value={newComment}
-          onChange={(event) => {
-            setNewComment(event.target.value);
+    <Wrapper>
+      <Container>
+        <Button
+          title="뒤로 가기"
+          onClick={() => {
+            navigate("/");
           }}
         />
-        <Button title="댓글 작성하기" />
-      </StyledForm>
-    </>
+        <PostContainer>
+          <TitleText>{post?.title}</TitleText>
+          <ContentText>{post?.content}</ContentText>
+        </PostContainer>
+        <Button
+          title="수정하기"
+          onClick={() => navigate(`/post-write/${postId}`)}
+        />
+        <Button title="삭제하기" onClick={deletePost} />
+        <CommentLabel>댓글</CommentLabel>
+        <CommentList comments={post?.comments} />
+        <Form onSubmit={createComment}>
+          <Input
+            type="text"
+            value={newComment}
+            onChange={(event) => {
+              setNewComment(event.target.value);
+            }}
+          />
+          <Button title="댓글 작성하기" />
+        </Form>
+      </Container>
+    </Wrapper>
   );
 };
 
 const PostContainer = styled.div`
-  padding: 8px 16x;
+  padding: 8px 16px;
   border: 1px solid grey;
   border-radius: 8px;
 `;
@@ -86,11 +90,6 @@ const ContentText = styled.p`
 const CommentLabel = styled.p`
   font-size: 16px;
   font-weight: 500;
-`;
-
-const StyledForm = styled.form`
-  display: flex;
-  align-items: center;
 `;
 
 export default PostViewPage;

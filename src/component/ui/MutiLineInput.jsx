@@ -7,13 +7,15 @@ const MutiLineInput = (props) => {
 };
 
 const StyledTextarea = styled.textarea`
-  width: calc(100%-32px);
-  ${(props) => props.height && `height:${props.height}px;`}
-  padding:16px;
+  width: calc(100% - 32px);
+  ${(props) =>
+    props.height &&
+    `
+        height: ${props.height}px;
+    `}
+  padding: 16px;
   font-size: 16px;
   line-height: 20px;
-  background: #f2f2f2;
-  outline: 0;
 `;
 
 export default MutiLineInput;

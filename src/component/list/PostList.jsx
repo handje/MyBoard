@@ -1,22 +1,12 @@
 import React from "react";
-import styled from "styled-components";
 
+import { ListWrapper } from "../../styles";
 import PostListItem from "./PostListItem";
-
-export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  :not(:last-child) {
-    margin-botton: 16px;
-  }
-`;
 
 const PostList = (props) => {
   const { posts, onClickItem } = props;
   return (
-    <Wrapper>
+    <ListWrapper>
       {posts?.map((post, index) => {
         return (
           <PostListItem
@@ -26,7 +16,7 @@ const PostList = (props) => {
           />
         );
       })}
-    </Wrapper>
+    </ListWrapper>
   );
 };
 export default PostList;

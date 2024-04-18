@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import styled from "styled-components";
 
 import Form from "../ui/Form";
 import Input from "../ui/Input";
 import MutiLineInput from "../ui/MutiLineInput";
 import Button from "../ui/Button";
+import { Wrapper, Container } from "../../styles";
 
 const PostUpdatePage = () => {
   const navigate = useNavigate();
@@ -32,37 +32,33 @@ const PostUpdatePage = () => {
   };
 
   return (
-    <Form onSubmit={onSubmit}>
-      <Input
-        value={title}
-        onChange={(e) => {
-          setTitle(e.target.value);
-        }}
-      />
-      <MutiLineInput
-        height={480}
-        value={content}
-        onChange={(e) => {
-          setContent(e.target.value);
-        }}
-      />
-      <ButtonContainer>
+    <Wrapper>
+      <Container>
         <Button
           title="뒤로 가기"
           onClick={() => {
             navigate(`/post/${postId}`);
           }}
         />
-        <Button title="글 수정하기" />
-      </ButtonContainer>
-    </Form>
+        <Form onSubmit={onSubmit}>
+          <Input
+            value={title}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+          />
+          <MutiLineInput
+            height={480}
+            value={content}
+            onChange={(e) => {
+              setContent(e.target.value);
+            }}
+          />
+          <Button title="글 수정하기" />
+        </Form>
+      </Container>
+    </Wrapper>
   );
 };
-
-const ButtonContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: end;
-`;
 
 export default PostUpdatePage;

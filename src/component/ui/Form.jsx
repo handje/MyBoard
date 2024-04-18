@@ -7,7 +7,7 @@ const Form = (props) => {
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: end;
 `;
 
 export default Form;

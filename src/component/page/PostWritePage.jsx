@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 
 import Form from "../ui/Form";
 import Input from "../ui/Input";
 import MutiLineInput from "../ui/MutiLineInput";
 import Button from "../ui/Button";
+import { Wrapper, Container } from "../../styles";
 
 const PostWritePage = () => {
   const navigate = useNavigate();
@@ -27,38 +27,33 @@ const PostWritePage = () => {
   };
 
   return (
-    <Form onSubmit={onSubmit}>
-      <Input
-        value={title}
-        onChange={(event) => {
-          setTitle(event.target.value);
-        }}
-      />
-      <MutiLineInput
-        height={480}
-        value={content}
-        onChange={(event) => {
-          setContent(event.target.value);
-        }}
-      />
-      <ButtonContainer>
+    <Wrapper>
+      <Container>
         <Button
           title="뒤로 가기"
           onClick={() => {
             navigate("/");
           }}
         />
-        <Button title="글 작성하기" />
-      </ButtonContainer>
-    </Form>
+        <Form onSubmit={onSubmit}>
+          <Input
+            value={title}
+            onChange={(event) => {
+              setTitle(event.target.value);
+            }}
+          />
+          <MutiLineInput
+            height={480}
+            value={content}
+            onChange={(event) => {
+              setContent(event.target.value);
+            }}
+          />
+          <Button title="글 작성하기" />
+        </Form>
+      </Container>
+    </Wrapper>
   );
 };
-
-const ButtonContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  margin: 0;
-`;
 
 export default PostWritePage;
