@@ -16,6 +16,7 @@ const StyledTextarea = styled.textarea`
   padding: 16px;
   font-size: 16px;
   line-height: 20px;
+  border: 1px solid #ccc;
 `;
 
 export default MutiLineInput;

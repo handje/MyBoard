@@ -23,6 +23,11 @@ const StyledInput = styled.input`
   padding: 16px;
   font-size: 16px;
   line-height: 20px;
+  border: 1px solid #ccc;
+
+  &::placeholder {
+    color: #ccc;
+  }
 `;
 
 export default Input;

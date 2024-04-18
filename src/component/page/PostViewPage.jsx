@@ -18,9 +18,11 @@ const PostViewPage = () => {
   const post = postList[postIndex];
 
   const deletePost = () => {
-    postList.splice(postIndex, 1);
-    localStorage.setItem("test", JSON.stringify(postList));
-    navigate("/");
+    if (window.confirm("삭제하시겠습니까?")) {
+      postList.splice(postIndex, 1);
+      localStorage.setItem("test", JSON.stringify(postList));
+      navigate("/");
+    }
   };
 
   const createComment = (e) => {
