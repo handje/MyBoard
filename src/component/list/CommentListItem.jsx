@@ -2,15 +2,16 @@ import React from "react";
 import styled from "styled-components";
 
 import UserIcon from "../ui/UserIcon";
+import { useAuth } from "../../AuthContext";
 
 const PostListItem = (props) => {
   const { comment } = props;
-  const loginUser = "guest";
+  const { loggedInUser } = useAuth();
   return (
     <CommentContainer>
       <UserIcon></UserIcon>
       <Wrapper>
-        <UserName>{loginUser}</UserName>
+        <UserName>{loggedInUser}</UserName>
         <ContentText>{comment?.content}</ContentText>
       </Wrapper>
     </CommentContainer>

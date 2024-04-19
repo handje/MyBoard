@@ -4,20 +4,22 @@ import styled from "styled-components";
 
 import LoginPage from "../page/LoginPage";
 import UserIcon from "../ui/UserIcon";
+import { useAuth } from "../../AuthContext";
 
 const Layout = () => {
   const navigate = useNavigate();
-  const user = localStorage.getItem("loginUser");
+  const { loggedInUser } = useAuth();
+
   return (
     <>
       <Header onClick={() => navigate("/")}>
         <TitleText>Blog</TitleText>
         <UserContainer>
           <UserIcon />
-          guest
+          {loggedInUser}
         </UserContainer>
       </Header>
-      {user ? <Outlet /> : <LoginPage />}
+      {loggedInUser ? <Outlet /> : <LoginPage />}
     </>
   );
 };
@@ -42,4 +44,5 @@ const UserContainer = styled.div`
   text-align: center;
   cursor: pointer;
 `;
+
 export default Layout;

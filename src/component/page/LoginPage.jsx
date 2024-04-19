@@ -5,11 +5,13 @@ import styled from "styled-components";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
 import { Wrapper, Container } from "../../styles";
+import { useAuth } from "../../AuthContext";
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const [id, setId] = useState("");
   const [pwd, setPwd] = useState("");
+  const { login } = useAuth();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -19,6 +21,7 @@ const LoginPage = () => {
     );
 
     if (loginUser) {
+      login(id);
       localStorage.setItem("loginUser", loginUser.id);
       navigate("/");
     } else {
