@@ -27,14 +27,20 @@ const PostViewPage = () => {
 
   const createComment = (e) => {
     e.preventDefault();
-    const comment = {
-      id: parseInt(postId) * 10 + post.comments.length + 1,
-      content: newComment,
-    };
-    post.comments.push(comment);
-    postList.splice(postIndex, 1);
-    localStorage.setItem("test", JSON.stringify([...postList, post]));
-    setNewComment("");
+    if (window.confirm("댓글을 등록하시겠습니까?")) {
+      if (newComment.length) {
+        const comment = {
+          id: parseInt(postId) * 10 + post.comments.length + 1,
+          content: newComment,
+        };
+        post.comments.push(comment);
+        postList.splice(postIndex, 1);
+        localStorage.setItem("test", JSON.stringify([...postList, post]));
+        setNewComment("");
+      } else {
+        window.alert("내용을 입력해주세요.");
+      }
+    }
   };
 
   return (

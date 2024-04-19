@@ -10,20 +10,26 @@ import { Wrapper, Container } from "../../styles";
 const PostWritePage = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState();
+  const [content, setContent] = useState("");
   const postList = JSON.parse(localStorage.getItem("test")) ?? [];
 
   //useCallback으로 바꿀방법???????????????????
   const onSubmit = (e) => {
     e.preventDefault();
-    const newPost = {
-      id: postList.length + 1,
-      title: title,
-      content: content,
-      comments: [],
-    };
-    localStorage.setItem("test", JSON.stringify([...postList, newPost]));
-    navigate("/");
+    if (window.confirm("게시물을 등록하시겠습니까?")) {
+      if (title.length && content.length) {
+        const newPost = {
+          id: postList.length + 1,
+          title: title,
+          content: content,
+          comments: [],
+        };
+        localStorage.setItem("test", JSON.stringify([...postList, newPost]));
+        navigate("/");
+      } else {
+        window.alert("내용을 입력해주세요.");
+      }
+    }
   };
 
   return (

@@ -20,15 +20,17 @@ const PostUpdatePage = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const updatePost = {
-      id: parseInt(postId),
-      title: title,
-      content: content,
-      comments: post.comments,
-    };
-    postList.splice(postIndex, 1);
-    localStorage.setItem("test", JSON.stringify([...postList, updatePost]));
-    navigate(`/post/${postId}`);
+    if (window.confirm("수정하시겠습니까?")) {
+      const updatePost = {
+        id: parseInt(postId),
+        title: title,
+        content: content,
+        comments: post.comments,
+      };
+      postList.splice(postIndex, 1);
+      localStorage.setItem("test", JSON.stringify([...postList, updatePost]));
+      navigate(`/post/${postId}`);
+    }
   };
 
   return (
