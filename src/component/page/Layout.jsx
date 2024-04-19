@@ -3,27 +3,43 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import LoginPage from "../page/LoginPage";
+import UserIcon from "../ui/UserIcon";
 
 const Layout = () => {
   const navigate = useNavigate();
   const user = localStorage.getItem("loginUser");
   return (
     <>
-      <Header onClick={() => navigate("/")}>BLOG</Header>
+      <Header onClick={() => navigate("/")}>
+        <TitleText>Blog</TitleText>
+        <UserContainer>
+          <UserIcon />
+          guest
+        </UserContainer>
+      </Header>
       {user ? <Outlet /> : <LoginPage />}
     </>
   );
 };
 
-const Header = styled.header`
-  position: sticky;
-  top: 0;
-  color: #ffffff;
+const Header = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+`;
+const TitleText = styled.h1`
+  width: fit-content;
+  color: grey;
   font-size: 50px;
-  font-weight: bold;
+  cursor: pointer;
+`;
+const UserContainer = styled.div`
+  display: flex;
+  position: absolute;
+  top: 5px;
+  right: 5px;
   text-align: center;
   cursor: pointer;
-  background-color: grey;
 `;
-
 export default Layout;
