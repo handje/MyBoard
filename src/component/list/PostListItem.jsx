@@ -1,11 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-const TitleText = styled.p`
-  font-size: 20px;
-  font-weight: 500;
-`;
-
 const PostListItem = (props) => {
   const { post, onClick } = props;
   return (
@@ -29,5 +24,9 @@ const Wrapper = styled.div`
   :hover {
     background: lightgrey;
   }
+`;
+const TitleText = styled.p`
+  font-size: 20px;
+  font-weight: 500;
 `;
 export default PostListItem;

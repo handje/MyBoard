@@ -8,10 +8,7 @@ import { getItem } from "../utils/localStorage";
 
 const MainPage = () => {
   const navigate = useNavigate();
-
-  const postList = getItem("posts")?.sort(
-    (a, b) => parseInt(a.id) - parseInt(b.id)
-  );
+  const postList = getItem("posts")?.reverse();
   return (
     <Wrapper>
       <Container>
