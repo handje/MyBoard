@@ -4,10 +4,12 @@ import styled from "styled-components";
 
 import LoginPage from "../page/LoginPage";
 import UserIcon from "../ui/UserIcon";
+import { getItem } from "../utils/localStorage";
 
 const Layout = () => {
   const navigate = useNavigate();
-  const user = localStorage.getItem("loginUser");
+  const user = getItem("loginUser");
+
   return (
     <>
       <Header onClick={() => navigate("/")}>

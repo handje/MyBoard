@@ -6,12 +6,13 @@ import Input from "../ui/Input";
 import MutiLineInput from "../ui/MutiLineInput";
 import Button from "../ui/Button";
 import { Wrapper, Container } from "../../styles";
+import { getItem, setItem } from "../utils/localStorage";
 
 const PostUpdatePage = () => {
   const navigate = useNavigate();
   const { postId } = useParams();
 
-  const postList = JSON.parse(localStorage.getItem("test"));
+  const postList = getItem("posts");
   const postIndex = postList.findIndex((item) => item.id === parseInt(postId));
   const post = postList[postIndex];
 
@@ -28,7 +29,7 @@ const PostUpdatePage = () => {
         comments: post.comments,
       };
       postList.splice(postIndex, 1);
-      localStorage.setItem("test", JSON.stringify([...postList, updatePost]));
+      setItem("posts", [...postList, updatePost]);
       navigate(`/post/${postId}`);
     }
   };

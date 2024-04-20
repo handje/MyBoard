@@ -7,20 +7,21 @@ import Input from "../ui/Input";
 import Form from "../ui/Form";
 import { Wrapper, Container } from "../../styles";
 import CommentList from "../list/CommentList";
+import { getItem, setItem } from "../utils/localStorage";
 
 const PostViewPage = () => {
   const navigate = useNavigate();
   const { postId } = useParams();
   const [newComment, setNewComment] = useState("");
 
-  const postList = JSON.parse(localStorage.getItem("test"));
+  const postList = getItem("posts");
   const postIndex = postList.findIndex((item) => item.id === parseInt(postId));
   const post = postList[postIndex];
 
   const deletePost = () => {
     if (window.confirm("삭제하시겠습니까?")) {
       postList.splice(postIndex, 1);
-      localStorage.setItem("test", JSON.stringify(postList));
+      setItem("posts", postList);
       navigate("/");
     }
   };
@@ -35,7 +36,7 @@ const PostViewPage = () => {
         };
         post.comments.push(comment);
         postList.splice(postIndex, 1);
-        localStorage.setItem("test", JSON.stringify([...postList, post]));
+        setItem("posts", [...postList, post]);
         setNewComment("");
       } else {
         window.alert("내용을 입력해주세요.");

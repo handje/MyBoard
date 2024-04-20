@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom";
 import Button from "../ui/Button";
 import PostList from "../list/PostList";
 import { Wrapper, Container } from "../../styles";
+import { getItem } from "../utils/localStorage";
 
 const MainPage = () => {
   const navigate = useNavigate();
 
-  const postList = JSON.parse(localStorage.getItem("test"))?.sort(
+  const postList = getItem("posts")?.sort(
     (a, b) => parseInt(a.id) - parseInt(b.id)
   );
   return (
