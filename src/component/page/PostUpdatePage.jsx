@@ -6,13 +6,15 @@ import Input from "../ui/Input";
 import MutiLineInput from "../ui/MutiLineInput";
 import Button from "../ui/Button";
 import { Wrapper, Container } from "../../styles";
+import { getItem, setItem } from "../utils/localStorage";
+import currentDate from "../utils/currentDate";
 
 const PostUpdatePage = () => {
   const navigate = useNavigate();
   const { postId } = useParams();
 
-  const postList = JSON.parse(localStorage.getItem("test"));
-  const postIndex = postList.findIndex((item) => item.id === parseInt(postId));
+  const postList = getItem("posts");
+  const postIndex = postList.findIndex((item) => item.id === postId);
   const post = postList[postIndex];
 
   const [title, setTitle] = useState(post ? post.title : "");
@@ -22,13 +24,15 @@ const PostUpdatePage = () => {
     e.preventDefault();
     if (window.confirm("수정하시겠습니까?")) {
       const updatePost = {
-        id: parseInt(postId),
+        id: postId,
         title: title,
         content: content,
+        date: post.date,
+        updateDate: currentDate(new Date()),
         comments: post.comments,
       };
       postList.splice(postIndex, 1);
-      localStorage.setItem("test", JSON.stringify([...postList, updatePost]));
+      setItem("posts", [...postList, updatePost]);
       navigate(`/post/${postId}`);
     }
   };

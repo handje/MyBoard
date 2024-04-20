@@ -6,6 +6,7 @@ import Input from "../ui/Input";
 import Button from "../ui/Button";
 import { Wrapper, Container } from "../../styles";
 import { useAuth } from "../../AuthContext";
+import { getItem, setItem } from "../utils/localStorage";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -15,14 +16,14 @@ const LoginPage = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const users = JSON.parse(localStorage.getItem("users")) ?? [];
+    const users = getItem("users") ?? [];
     const [loginUser] = users.filter(
       (user) => user.id === id && user.pwd === pwd
     );
 
     if (loginUser) {
       login(id);
-      localStorage.setItem("loginUser", loginUser.id);
+      setItem("loginUser", loginUser.id);
       navigate("/");
     } else {
       alert("ID, PassWord 확인해주세요.");

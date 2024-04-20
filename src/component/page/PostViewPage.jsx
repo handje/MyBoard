@@ -1,26 +1,28 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { v4 as uuidv4 } from "uuid";
 
 import Button from "../ui/Button";
 import Input from "../ui/Input";
 import Form from "../ui/Form";
 import { Wrapper, Container } from "../../styles";
 import CommentList from "../list/CommentList";
+import { getItem, setItem } from "../utils/localStorage";
 
 const PostViewPage = () => {
   const navigate = useNavigate();
   const { postId } = useParams();
   const [newComment, setNewComment] = useState("");
 
-  const postList = JSON.parse(localStorage.getItem("test"));
-  const postIndex = postList.findIndex((item) => item.id === parseInt(postId));
+  const postList = getItem("posts");
+  const postIndex = postList.findIndex((item) => item.id === postId);
   const post = postList[postIndex];
 
   const deletePost = () => {
     if (window.confirm("삭제하시겠습니까?")) {
       postList.splice(postIndex, 1);
-      localStorage.setItem("test", JSON.stringify(postList));
+      setItem("posts", postList);
       navigate("/");
     }
   };
@@ -30,12 +32,12 @@ const PostViewPage = () => {
     if (window.confirm("댓글을 등록하시겠습니까?")) {
       if (newComment.length) {
         const comment = {
-          id: parseInt(postId) * 10 + post.comments.length + 1,
+          id: uuidv4(),
           content: newComment,
         };
         post.comments.push(comment);
         postList.splice(postIndex, 1);
-        localStorage.setItem("test", JSON.stringify([...postList, post]));
+        setItem("posts", [...postList, post]);
         setNewComment("");
       } else {
         window.alert("내용을 입력해주세요.");
@@ -54,6 +56,7 @@ const PostViewPage = () => {
         />
         <PostContainer>
           <TitleText>{post?.title}</TitleText>
+          <InfoText>{post?.date}</InfoText>
           <ContentText>{post?.content}</ContentText>
         </PostContainer>
         <Button
@@ -84,13 +87,16 @@ const PostContainer = styled.div`
   border-radius: 8px;
 `;
 
-const TitleText = styled.p`
-  font-size: 28px;
-  font-weight: 500;
+const TitleText = styled.h1`
+  font-size: 30px;
+`;
+const InfoText = styled.p`
+  font-size: 10px;
 `;
 
 const ContentText = styled.p`
   font-size: 20px;
+  font-weight: 500;
   line-height: 32px;
   white-space: pre-wrap;
 `;

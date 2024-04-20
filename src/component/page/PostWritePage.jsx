@@ -1,30 +1,34 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 import Form from "../ui/Form";
 import Input from "../ui/Input";
 import MutiLineInput from "../ui/MutiLineInput";
 import Button from "../ui/Button";
 import { Wrapper, Container } from "../../styles";
+import { getItem, setItem } from "../utils/localStorage";
+import currentDate from "../utils/currentDate";
 
 const PostWritePage = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const postList = JSON.parse(localStorage.getItem("test")) ?? [];
+  const postList = getItem("posts") ?? [];
 
-  //useCallback으로 바꿀방법???????????????????
+  //useCallback으로 바꿀방법???????????????????s
   const onSubmit = (e) => {
     e.preventDefault();
     if (window.confirm("게시물을 등록하시겠습니까?")) {
       if (title.length && content.length) {
         const newPost = {
-          id: postList.length + 1,
+          id: uuidv4(),
           title: title,
           content: content,
+          date: currentDate(new Date()),
           comments: [],
         };
-        localStorage.setItem("test", JSON.stringify([...postList, newPost]));
+        setItem("posts", [...postList, newPost]);
         navigate("/");
       } else {
         window.alert("내용을 입력해주세요.");
