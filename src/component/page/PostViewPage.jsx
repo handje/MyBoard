@@ -83,7 +83,7 @@ const PostViewPage = () => {
 
 const PostContainer = styled.div`
   padding: 8px 16px;
-  border: 1px solid grey;
+  border: 1px solid #cb99c5;
   border-radius: 8px;
 `;
 

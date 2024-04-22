@@ -32,10 +32,11 @@ const Wrapper = styled.div`
   border-radius: 8px;
   background: white;
 `;
-const UserName = styled.a`
+const UserName = styled.p`
   font-size: 20px;
   font-weight: 500;
   cursor: pointer;
+  margin: 0;
 `;
 const ContentText = styled.p`
   font-size: 16px;

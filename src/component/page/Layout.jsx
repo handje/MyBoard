@@ -2,13 +2,10 @@ import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import LoginPage from "../page/LoginPage";
 import UserIcon from "../ui/UserIcon";
-import { getItem } from "../utils/localStorage";
 
 const Layout = () => {
   const navigate = useNavigate();
-  const user = getItem("loginUser");
 
   return (
     <>
@@ -19,7 +16,7 @@ const Layout = () => {
           guest
         </UserContainer>
       </Header>
-      {user ? <Outlet /> : <LoginPage />}
+      <Outlet />
     </>
   );
 };
@@ -32,9 +29,12 @@ const Header = styled.div`
 `;
 const TitleText = styled.h1`
   width: fit-content;
-  color: grey;
-  font-size: 50px;
+  color: #fff;
+  font-size: 80px;
+  font-family: system-ui;
   cursor: pointer;
+  text-shadow: -2px 0 #cb99c5, 0 3px #cb99c5, 3px 0 #cb99c5, 0 -3px #cb99c5;
+  border-radius: 8px;
 `;
 const UserContainer = styled.div`
   display: flex;
