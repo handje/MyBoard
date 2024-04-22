@@ -8,7 +8,7 @@ import Input from "../ui/Input";
 import Form from "../ui/Form";
 import { Wrapper, Container } from "../../styles";
 import CommentList from "../list/CommentList";
-import { getItem, setItem } from "../utils/localStorage";
+import { getItem, setItem } from "../../utils/localStorage";
 
 const PostViewPage = () => {
   const navigate = useNavigate();

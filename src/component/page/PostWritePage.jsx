@@ -7,8 +7,8 @@ import Input from "../ui/Input";
 import MutiLineInput from "../ui/MutiLineInput";
 import Button from "../ui/Button";
 import { Wrapper, Container } from "../../styles";
-import { getItem, setItem } from "../utils/localStorage";
-import currentDate from "../utils/currentDate";
+import { getItem, setItem } from "../../utils/localStorage";
+import currentDate from "../../utils/currentDate";
 
 const PostWritePage = () => {
   const navigate = useNavigate();

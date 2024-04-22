@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../ui/Button";
 import PostList from "../list/PostList";
 import { Wrapper, Container } from "../../styles";
-import { getItem } from "../utils/localStorage";
+import { getItem } from "../../utils/localStorage";
 
 const MainPage = () => {
   const navigate = useNavigate();
