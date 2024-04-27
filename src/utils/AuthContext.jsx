@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext } from "react";
-import { getItem, setItem } from "./useLocalStorage";
+
+import { getItem, setItem, removeItem } from "./useLocalStorage";
 // AuthContext 생성
 const AuthContext = createContext("");
 
@@ -14,6 +15,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
+    removeItem("ID");
     setLoggedInUser("");
   };
 

@@ -19,3 +19,11 @@ export const setItem = (key, value) => {
     console.error("Error setting item", err);
   }
 };
+
+export const removeItem = (key) => {
+  try {
+    localStorage.removeItem(key);
+  } catch (err) {
+    console.error("Error removing item", err);
+  }
+};

@@ -10,6 +10,9 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     color: #333;
   }
+  ul{
+    list-style-type: none;
+  }
 
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",

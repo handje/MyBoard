@@ -2,9 +2,7 @@ import styled from "styled-components";
 import { VscAccount } from "react-icons/vsc";
 
 const UserIcon = (props) => {
-  return (
-    <StyledUserIcon className="button" onClick={() => {}}></StyledUserIcon>
-  );
+  return <StyledUserIcon></StyledUserIcon>;
 };
 
 const StyledUserIcon = styled(VscAccount)`
