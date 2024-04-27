@@ -3,20 +3,22 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import UserIcon from "../ui/UserIcon";
+import LoginPage from "./LoginPage";
+import { useAuth } from "../../utils/AuthContext";
 
 const Layout = () => {
   const navigate = useNavigate();
-
+  const { loggedInUser } = useAuth();
   return (
     <>
       <Header onClick={() => navigate("/")}>
         <TitleText>Blog</TitleText>
         <UserContainer>
           <UserIcon />
-          guest
+          {loggedInUser}
         </UserContainer>
       </Header>
-      <Outlet />
+      {loggedInUser ? <Outlet /> : <LoginPage />}
     </>
   );
 };

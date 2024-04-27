@@ -6,18 +6,23 @@ import PostViewPage from "./component/page/PostViewPage";
 import MainPage from "./component/page/MainPage";
 import PostUpdatePage from "./component/page/PostUpdatePage";
 import Layout from "./component/page/Layout";
+import LoginPage from "./component/page/LoginPage";
+import { AuthProvider } from "./utils/AuthContext";
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<MainPage />} />
-          <Route path="post/:postId" element={<PostViewPage />} />
-          <Route path="post-write" element={<PostWritePage />} />
-          <Route path="post-write/:postId" element={<PostUpdatePage />} />
-        </Route>
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="post/:postId" element={<PostViewPage />} />
+            <Route path="post-write" element={<PostWritePage />} />
+            <Route path="post-write/:postId" element={<PostUpdatePage />} />
+          </Route>
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 }
