@@ -2,13 +2,14 @@ import React from "react";
 import styled from "styled-components";
 
 const Input = (props) => {
-  const { type, placeholder, value, onChange } = props;
+  const { type, placeholder, value, onChange, className } = props;
   return (
     <StyledInput
       type={type}
       placeholder={placeholder}
       onChange={onChange}
       value={value}
+      className={className}
     />
   );
 };
@@ -24,7 +25,6 @@ const StyledInput = styled.input`
   font-size: 16px;
   line-height: 20px;
   border: 1px solid #ccc;
-
   &::placeholder {
     color: #ccc;
   }

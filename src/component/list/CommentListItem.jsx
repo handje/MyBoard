@@ -1,14 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-import UserIcon from "../ui/UserIcon";
-
 const PostListItem = (props) => {
   const { comment } = props;
 
   return (
     <CommentContainer>
-      <UserIcon></UserIcon>
       <Wrapper>
         <ContentText>{comment?.content}</ContentText>
       </Wrapper>

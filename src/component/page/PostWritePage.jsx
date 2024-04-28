@@ -8,13 +8,15 @@ import MutiLineInput from "../ui/MutiLineInput";
 import Button from "../ui/Button";
 import { Wrapper, Container } from "../../styles";
 import { getItem, setItem } from "../../utils/useLocalStorage";
+import { useAuth } from "../../utils/AuthContext";
 import currentDate from "../../utils/useCurrentDate";
 
 const PostWritePage = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const postList = getItem("posts") ?? [];
+  const { loggedInUser } = useAuth();
+  const postList = getItem(loggedInUser) ?? [];
 
   //useCallback으로 바꿀방법???????????????????s
   const onSubmit = (e) => {
@@ -28,7 +30,7 @@ const PostWritePage = () => {
           date: currentDate(new Date()),
           comments: [],
         };
-        setItem("posts", [...postList, newPost]);
+        setItem(loggedInUser, [...postList, newPost]);
         navigate("/");
       } else {
         window.alert("내용을 입력해주세요.");
@@ -45,7 +47,7 @@ const PostWritePage = () => {
             navigate("/");
           }}
         />
-        <Form onSubmit={onSubmit}>
+        <Form onSubmit={onSubmit} direction={"column"}>
           <Input
             value={title}
             onChange={(event) => {

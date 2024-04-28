@@ -11,16 +11,16 @@ const Button = (props) => {
 
 const StyledButton = styled.button`
   ${(props) => props.width && `width:${props.width}%;`}
+  height:100%;
   padding: 10px 16px;
   margin: 0px 3px;
   background: #cb99c5;
-
   border: 0;
   border-radius: 8px;
   box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
     7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
   outline: none;
-
+  white-space: nowrap;
   font-size: 18px;
   font-weight: 800;
   color: #ffffff;

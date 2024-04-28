@@ -7,13 +7,15 @@ import MutiLineInput from "../ui/MutiLineInput";
 import Button from "../ui/Button";
 import { Wrapper, Container } from "../../styles";
 import { getItem, setItem } from "../../utils/useLocalStorage";
+import { useAuth } from "../../utils/AuthContext";
 import currentDate from "../../utils/useCurrentDate";
 
 const PostUpdatePage = () => {
   const navigate = useNavigate();
   const { postId } = useParams();
+  const { loggedInUser } = useAuth();
 
-  const postList = getItem("posts");
+  const postList = getItem(loggedInUser);
   const postIndex = postList.findIndex((item) => item.id === postId);
   const post = postList[postIndex];
 
@@ -46,7 +48,7 @@ const PostUpdatePage = () => {
             navigate(`/post/${postId}`);
           }}
         />
-        <Form onSubmit={onSubmit}>
+        <Form onSubmit={onSubmit} direction={"column"}>
           <Input
             value={title}
             onChange={(e) => {

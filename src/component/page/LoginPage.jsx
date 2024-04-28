@@ -10,7 +10,7 @@ import { getItem } from "../../utils/useLocalStorage";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const [id, setId] = useState("");
+  const [userName, setUserName] = useState("");
   const [pwd, setPwd] = useState("");
   const { login } = useAuth();
 
@@ -18,15 +18,15 @@ const LoginPage = () => {
     e.preventDefault();
     const users = getItem("users") ?? [];
     const [loginUser] = users.filter(
-      (user) => user.id === id && user.pwd === pwd
+      (user) => user.userName === userName && user.pwd === pwd
     );
 
     if (loginUser) {
-      login(id);
+      login(userName);
       navigate("/");
     } else {
-      alert("ID, PassWord 확인해주세요.");
-      setId("");
+      alert("비밀번호를 확인해주세요.");
+      setUserName("");
       setPwd("");
     }
   };
@@ -37,15 +37,15 @@ const LoginPage = () => {
         <LoginForm onSubmit={onSubmit}>
           <Input
             type="text"
-            placeholder="ID"
-            value={id}
+            placeholder="User Name"
+            value={userName}
             onChange={(e) => {
-              setId(e.target.value);
+              setUserName(e.target.value);
             }}
           />
           <Input
             type="password"
-            placeholder="PWD"
+            placeholder="password"
             value={pwd}
             onChange={(e) => {
               setPwd(e.target.value);
