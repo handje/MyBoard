@@ -14,7 +14,7 @@ const StyledButton = styled.button`
   height:100%;
   padding: 10px 16px;
   margin: 0px 3px;
-  background: #cb99c5;
+  background: var(--primary-color);
   border: 0;
   border-radius: 8px;
   box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
@@ -30,7 +30,7 @@ const StyledButton = styled.button`
     height: 0%;
     width: 2px;
   }
-  &:hover {
+  &:active {
     box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.5),
       -4px -4px 6px 0 rgba(116, 125, 136, 0.5),
       inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2),

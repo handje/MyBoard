@@ -21,7 +21,9 @@ const TitleText = styled.h1`
   font-size: 80px;
   font-family: system-ui;
   cursor: pointer;
-  text-shadow: -2px 0 #cb99c5, 0 3px #cb99c5, 3px 0 #cb99c5, 0 -3px #cb99c5;
+  text-shadow: -2px 0 var(--primary-color), 0 3px var(--primary-color),
+    3px 0 var(--primary-color), 0 -3px var(--primary-color);
+
   border-radius: 8px;
 `;
 export default Header;

@@ -4,9 +4,9 @@ import styled from "styled-components";
 
 import Button from "../ui/Button";
 import { Wrapper, Container } from "../../styles";
-import MemoList from "../list/MemoList";
 import { getItem, setItem } from "../../utils/useLocalStorage";
 import { useAuth } from "../../utils/AuthContext";
+import MemoList from "../list/MemoList";
 
 const PostViewPage = () => {
   const { loggedInUser } = useAuth();
@@ -14,10 +14,11 @@ const PostViewPage = () => {
   const navigate = useNavigate();
   const { postId } = useParams();
 
-  const [newMemo, setNewMemo] = useState(false);
   const postList = getItem(loggedInUser);
   const postIndex = postList.findIndex((item) => item.id === postId);
   const post = postList[postIndex];
+
+  const [memoMode, setMemoMode] = useState(false);
 
   const deletePost = () => {
     if (window.confirm("삭제하시겠습니까?")) {
@@ -47,9 +48,9 @@ const PostViewPage = () => {
         />
         <Button title="삭제하기" onClick={deletePost} />
         <Button
-          title={newMemo ? "취소" : "메모 추가"}
+          title={memoMode ? "취소" : "메모 추가"}
           onClick={() => {
-            setNewMemo(!newMemo);
+            setMemoMode(!memoMode);
           }}
         />
         <MemoList
@@ -57,7 +58,8 @@ const PostViewPage = () => {
           post={post}
           postIndex={postIndex}
           loggedInUser={loggedInUser}
-          newMemo={newMemo}
+          memoMode={memoMode}
+          setMemoMode={setMemoMode}
         />
       </Container>
     </Wrapper>

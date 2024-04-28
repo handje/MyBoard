@@ -1,50 +1,56 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
-import { useNavigate, useParams } from "react-router-dom";
 
 import { ListWrapper } from "../../styles";
-import CommentListItem from "./CommentListItem";
 import Button from "../ui/Button";
 import Input from "../ui/Input";
 import Form from "../ui/Form";
-import { getItem, setItem } from "../../utils/useLocalStorage";
-import { useAuth } from "../../utils/AuthContext";
+import { setItem } from "../../utils/useLocalStorage";
 
 const CommentList = (props) => {
-  const { postList, post, postIndex, loggedInUser, newMemo } = props;
-  const [newComment, setNewComment] = useState("");
+  const { postList, post, postIndex, loggedInUser, memoMode, setMemoMode } =
+    props;
+  const [newMemo, setNewMemo] = useState("");
+  // const [newPost, setNewPost] = useState(post);
 
   const createComment = (e) => {
     e.preventDefault();
-    if (window.confirm("댓글을 등록하시겠습니까?")) {
-      if (newComment.length) {
-        const comment = {
-          id: uuidv4(),
-          content: newComment,
-        };
-        post.comments.push(comment);
-        postList.splice(postIndex, 1);
-        setItem(loggedInUser, [...postList, post]);
-        setNewComment("");
-      } else {
-        window.alert("내용을 입력해주세요.");
-      }
+    if (newMemo.length) {
+      const comment = {
+        id: uuidv4(),
+        content: newMemo,
+      };
+      post.comments.push(comment);
+      postList.splice(postIndex, 1);
+      setItem(loggedInUser, [...postList, post]);
+      setNewMemo("");
+      setMemoMode(!newMemo);
+    } else {
+      window.alert("내용을 입력해주세요.");
     }
   };
 
+  const deleteMemo = (id) => {
+    // const newMemos = post.comments.filter((comment) => comment.id !== id);
+    // console.log(newPost);
+    // setNewPost({ ...post, comments: newMemos });
+    // postList.splice(postIndex, 1);
+    // console.log(newPost);
+    // setItem(loggedInUser, [...postList, newPost]);
+  };
   return (
     <>
-      {newMemo && (
+      {memoMode && (
         <MemoContainer>
           <CommentLabel>메모</CommentLabel>
           <Form onSubmit={createComment}>
             <Input
               type="text"
-              value={newComment}
+              value={newMemo}
               className={"input"}
               onChange={(event) => {
-                setNewComment(event.target.value);
+                setNewMemo(event.target.value);
               }}
             />
             <Button title="등록" />
@@ -53,12 +59,51 @@ const CommentList = (props) => {
       )}
       <ListWrapper>
         {post?.comments?.map((comment) => {
-          return <CommentListItem key={comment.id} comment={comment} />;
+          return (
+            <CommentContainer className="container" key={comment.id}>
+              <Wrapper id="wrapper">
+                <ContentText>{comment?.content}</ContentText>
+              </Wrapper>
+              <StyledButton onClick={() => deleteMemo(comment.id)}>
+                ❌
+              </StyledButton>
+            </CommentContainer>
+          );
         })}
       </ListWrapper>
     </>
   );
 };
+const CommentContainer = styled.div`
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+`;
+const Wrapper = styled.div`
+  width: calc(100% - 60px);
+  padding: 10px;
+  border: 1px solid grey;
+  border-radius: 8px;
+  #wrapper {
+    margin-bottom: 0px;
+  }
+`;
+const ContentText = styled.p`
+  font-size: 16px;
+  white-space: pre-wrap;
+  margin: 5px 0px;
+`;
+const StyledButton = styled.button`
+  border: none;
+  background: transparent;
+  margin: 0 0 0 10px;
+  padding: 10px 0 20px 0;
+  font-size: 20px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
 const MemoContainer = styled.div`
   .input {
     margin-bottom: 0;
