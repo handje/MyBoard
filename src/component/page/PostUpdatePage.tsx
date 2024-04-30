@@ -9,18 +9,25 @@ import { Wrapper, Container } from "../../styles";
 import { getItem, setItem } from "../../utils/localStorage";
 import currentDate from "../../utils/currentDate";
 
+interface Post {
+  id: string;
+  title: string;
+  date: string;
+  content: string;
+  comments: { id: string; content: string }[];
+}
 const PostUpdatePage = () => {
   const navigate = useNavigate();
   const { postId } = useParams();
 
-  const postList = getItem("posts");
+  const postList: Post[] = getItem("posts") ?? [];
   const postIndex = postList.findIndex((item) => item.id === postId);
   const post = postList[postIndex];
 
-  const [title, setTitle] = useState(post ? post.title : "");
-  const [content, setContent] = useState(post ? post.content : "");
+  const [title, setTitle] = useState<string>(post ? post.title : "");
+  const [content, setContent] = useState<string>(post ? post.content : "");
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (window.confirm("수정하시겠습니까?")) {
       const updatePost = {
@@ -49,14 +56,14 @@ const PostUpdatePage = () => {
         <Form onSubmit={onSubmit}>
           <Input
             value={title}
-            onChange={(e) => {
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setTitle(e.target.value);
             }}
           />
           <MutiLineInput
             height={480}
             value={content}
-            onChange={(e) => {
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
               setContent(e.target.value);
             }}
           />

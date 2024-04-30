@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import PostWritePage from "./component/page/PostWritePage";
-import PostViewPage from "./component/page/PostViewPage";
+import PostWritePage from "./component/page/PostWritePage.tsx";
+import PostViewPage from "./component/page/PostViewPage.tsx";
 import MainPage from "./component/page/MainPage";
-import PostUpdatePage from "./component/page/PostUpdatePage";
+import PostUpdatePage from "./component/page/PostUpdatePage.tsx";
 import Layout from "./component/page/Layout";
 
 function App() {

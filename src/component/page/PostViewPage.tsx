@@ -10,12 +10,25 @@ import { Wrapper, Container } from "../../styles";
 import CommentList from "../list/CommentList";
 import { getItem, setItem } from "../../utils/localStorage";
 
+interface Post {
+  id: string;
+  title: string;
+  date: string;
+  content: string;
+  comments: { id: string; content: string }[];
+}
+
+interface Comment {
+  id: string;
+  content: string;
+}
+
 const PostViewPage = () => {
   const navigate = useNavigate();
   const { postId } = useParams();
-  const [newComment, setNewComment] = useState("");
+  const [newComment, setNewComment] = useState<string>("");
 
-  const postList = getItem("posts");
+  const postList: Post[] = getItem("posts") || [];
   const postIndex = postList.findIndex((item) => item.id === postId);
   const post = postList[postIndex];
 
@@ -27,11 +40,11 @@ const PostViewPage = () => {
     }
   };
 
-  const createComment = (e) => {
+  const createComment = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (window.confirm("댓글을 등록하시겠습니까?")) {
       if (newComment.length) {
-        const comment = {
+        const comment: Comment = {
           id: uuidv4(),
           content: newComment,
         };

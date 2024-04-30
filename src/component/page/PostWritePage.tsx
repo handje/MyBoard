@@ -9,19 +9,24 @@ import Button from "../ui/Button";
 import { Wrapper, Container } from "../../styles";
 import { getItem, setItem } from "../../utils/localStorage";
 import currentDate from "../../utils/currentDate";
-
+interface Post {
+  id: string;
+  title: string;
+  date: string;
+  content: string;
+  comments: { id: string; content: string }[];
+}
 const PostWritePage = () => {
   const navigate = useNavigate();
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const postList = getItem("posts") ?? [];
+  const [title, setTitle] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+  const postList: Post[] = getItem("posts") ?? [];
 
-  //useCallback으로 바꿀방법???????????????????s
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (window.confirm("게시물을 등록하시겠습니까?")) {
       if (title.length && content.length) {
-        const newPost = {
+        const newPost: Post = {
           id: uuidv4(),
           title: title,
           content: content,
