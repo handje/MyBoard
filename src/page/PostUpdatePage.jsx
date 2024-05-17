@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import Form from "../ui/Form";
-import Input from "../ui/Input";
-import MutiLineInput from "../ui/MutiLineInput";
-import Button from "../ui/Button";
-import { Wrapper, Container } from "../../styles";
-import { getItem, setItem } from "../../utils/localStorage";
-import currentDate from "../../utils/currentDate";
+import { Form, Input, MutiLineInput, Button } from "../component/common";
+import { Wrapper, Container } from "../component/styles/styles";
+import { getItem, setItem } from "../utils/localStorage";
+import currentDate from "../utils/currentDate";
 
 const PostUpdatePage = () => {
   const navigate = useNavigate();

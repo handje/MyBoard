@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import UserIcon from "../ui/UserIcon";
+import { UserIcon } from "../common";
 
 const PostListItem = (props) => {
   const { comment } = props;

@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import UserIcon from "../ui/UserIcon";
+import { UserIcon } from "../common";
 
 const Layout = () => {
   const navigate = useNavigate();

@@ -3,12 +3,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 
-import Button from "../ui/Button";
-import Input from "../ui/Input";
-import Form from "../ui/Form";
-import { Wrapper, Container } from "../../styles";
-import CommentList from "../list/CommentList";
-import { getItem, setItem } from "../../utils/localStorage";
+import { Button, Input, Form } from "../component/common";
+import { Wrapper, Container } from "../component/styles/styles";
+import CommentList from "../component/comment/CommentList";
+import { getItem, setItem } from "../utils/localStorage";
 
 const PostViewPage = () => {
   const navigate = useNavigate();

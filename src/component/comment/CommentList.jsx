@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ListWrapper } from "../../styles";
+import { ListWrapper } from "../styles/styles";
 import CommentListItem from "./CommentListItem";
 
 const CommentList = (props) => {
