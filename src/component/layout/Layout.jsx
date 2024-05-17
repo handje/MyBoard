@@ -10,7 +10,7 @@ const Layout = () => {
   return (
     <>
       <Header onClick={() => navigate("/")}>
-        <TitleText>Blog</TitleText>
+        <TitleText>MyLog</TitleText>
         <UserContainer>
           <UserIcon />
           guest

@@ -5,16 +5,16 @@ import { v4 as uuidv4 } from "uuid";
 
 import { Button, Input, Form } from "../component/common";
 import { Wrapper, Container } from "../component/styles/styles";
-import CommentList from "../component/comment/CommentList";
+import { CommentList } from "../component/comment";
 import { getItem, setItem } from "../utils/localStorage";
 
 const PostViewPage = () => {
   const navigate = useNavigate();
-  const { postId } = useParams();
+  const { id } = useParams();
   const [newComment, setNewComment] = useState("");
 
   const postList = getItem("posts");
-  const postIndex = postList.findIndex((item) => item.id === postId);
+  const postIndex = postList.findIndex((item) => item.id === id);
   const post = postList[postIndex];
 
   const deletePost = () => {
@@ -59,7 +59,7 @@ const PostViewPage = () => {
         </PostContainer>
         <Button
           title="수정하기"
-          onClick={() => navigate(`/post-write/${postId}`)}
+          onClick={() => navigate(`/post/${id}/update`)}
         />
         <Button title="삭제하기" onClick={deletePost} />
         <CommentLabel>댓글</CommentLabel>

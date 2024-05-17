@@ -4,8 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import { Form, Input, MutiLineInput, Button } from "../component/common";
 import { Wrapper, Container } from "../component/styles/styles";
-import { getItem, setItem } from "../utils/localStorage";
-import currentDate from "../utils/currentDate";
+import { currentDate, getItem, setItem } from "../utils";
 
 const PostWritePage = () => {
   const navigate = useNavigate();
@@ -21,7 +20,7 @@ const PostWritePage = () => {
           id: uuidv4(),
           title: title,
           content: content,
-          date: currentDate(new Date()),
+          date: currentDate(),
           comments: [],
         };
         setItem("posts", [...postList, newPost]);

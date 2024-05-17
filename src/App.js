@@ -1,22 +1,10 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 
-import { PostWritePage, PostUpdatePage, PostViewPage, MainPage } from "./page";
-import { Layout } from "./component/layout";
+import { router } from "./routes";
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<MainPage />} />
-          <Route path="post/:postId" element={<PostViewPage />} />
-          <Route path="post-write" element={<PostWritePage />} />
-          <Route path="post-write/:postId" element={<PostUpdatePage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

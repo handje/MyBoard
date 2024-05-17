@@ -3,15 +3,14 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { Form, Input, MutiLineInput, Button } from "../component/common";
 import { Wrapper, Container } from "../component/styles/styles";
-import { getItem, setItem } from "../utils/localStorage";
-import currentDate from "../utils/currentDate";
+import { currentDate, getItem, setItem } from "../utils";
 
 const PostUpdatePage = () => {
   const navigate = useNavigate();
-  const { postId } = useParams();
+  const { id } = useParams();
 
   const postList = getItem("posts");
-  const postIndex = postList.findIndex((item) => item.id === postId);
+  const postIndex = postList.findIndex((item) => item.id === id);
   const post = postList[postIndex];
 
   const [title, setTitle] = useState(post ? post.title : "");
@@ -21,16 +20,16 @@ const PostUpdatePage = () => {
     e.preventDefault();
     if (window.confirm("수정하시겠습니까?")) {
       const updatePost = {
-        id: postId,
+        id: id,
         title: title,
         content: content,
         date: post.date,
-        updateDate: currentDate(new Date()),
+        updateDate: currentDate(),
         comments: post.comments,
       };
       postList.splice(postIndex, 1);
       setItem("posts", [...postList, updatePost]);
-      navigate(`/post/${postId}`);
+      navigate(`/post/${id}`);
     }
   };
 
@@ -40,7 +39,7 @@ const PostUpdatePage = () => {
         <Button
           title="뒤로 가기"
           onClick={() => {
-            navigate(`/post/${postId}`);
+            navigate(`/post/${id}`);
           }}
         />
         <Form onSubmit={onSubmit}>
