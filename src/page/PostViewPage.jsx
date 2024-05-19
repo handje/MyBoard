@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { v4 as uuidv4 } from "uuid";
 
-import { Button, Input, Form } from "../component/common";
+import { Button } from "../component/common";
 import { Wrapper, Container } from "../component/styles/styles";
-import { CommentList } from "../component/comment";
+import { CommentList, NewComment } from "../component/comment";
 import { getItem, setItem, findPost } from "../utils";
 
 const PostViewPage = () => {
@@ -24,24 +23,6 @@ const PostViewPage = () => {
     }
   };
 
-  const createComment = (e) => {
-    e.preventDefault();
-    if (window.confirm("댓글을 등록하시겠습니까?")) {
-      if (newComment.length) {
-        const comment = {
-          id: uuidv4(),
-          content: newComment,
-        };
-        post.comments.push(comment);
-        postList.splice(postIndex, 1);
-        setItem("posts", [...postList, post]);
-        setNewComment("");
-      } else {
-        window.alert("내용을 입력해주세요.");
-      }
-    }
-  };
-
   return (
     <Wrapper>
       <Container>
@@ -52,7 +33,7 @@ const PostViewPage = () => {
           }}
         />
         <PostContainer>
-          <TitleText>{post?.title}</TitleText>
+          <h1>{post?.title}</h1>
           <InfoText>{post?.date}</InfoText>
           <ContentText>{post?.content}</ContentText>
         </PostContainer>
@@ -63,16 +44,12 @@ const PostViewPage = () => {
         <Button title="삭제하기" onClick={deletePost} />
         <CommentLabel>댓글</CommentLabel>
         <CommentList comments={post?.comments} />
-        <Form onSubmit={createComment}>
-          <Input
-            type="text"
-            value={newComment}
-            onChange={(event) => {
-              setNewComment(event.target.value);
-            }}
-          />
-          <Button title="댓글 작성하기" />
-        </Form>
+        <NewComment
+          newComment={newComment}
+          setNewComment={setNewComment}
+          postList={postList}
+          postIndex={postIndex}
+        />
       </Container>
     </Wrapper>
   );
@@ -82,11 +59,12 @@ const PostContainer = styled.div`
   padding: 8px 16px;
   border: 1px solid #cb99c5;
   border-radius: 8px;
+
+  & > h1 {
+    font-size: 30px;
+  }
 `;
 
-const TitleText = styled.h1`
-  font-size: 30px;
-`;
 const InfoText = styled.p`
   font-size: 10px;
 `;

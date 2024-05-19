@@ -10,7 +10,7 @@ const PostList = (props) => {
       {posts?.map((post, index) => {
         return (
           <PostListItem
-            key={post.id}
+            key={post?.id}
             post={post}
             onClick={() => onClickItem(post)}
           />

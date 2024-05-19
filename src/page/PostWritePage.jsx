@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 
 import { Form, Input, MutiLineInput, Button } from "../component/common";
 import { Wrapper, Container } from "../component/styles/styles";
@@ -15,20 +14,25 @@ const PostWritePage = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (window.confirm("게시물을 등록하시겠습니까?")) {
-      if (title.length && content.length) {
-        const newPost = {
-          id: uuidv4(),
-          title: title,
-          content: content,
-          date: currentDate(),
-          comments: [],
-        };
-        setItem("posts", [...postList, newPost]);
-        navigate("/");
-      } else {
-        window.alert("내용을 입력해주세요.");
+    try {
+      if (!window.confirm("게시물을 등록하시겠습니까?")) {
+        return;
       }
+      if (!title.length || !content.length) {
+        window.alert("내용을 입력해주세요.");
+        return;
+      }
+      const newPost = {
+        id: crypto.randomUUID(),
+        title: title,
+        content: content,
+        date: currentDate(),
+        comments: [],
+      };
+      setItem("posts", [...postList, newPost]);
+      navigate("/");
+    } catch (error) {
+      throw new Error("게시물 등록 중 오류가 발생했습니다.");
     }
   };
 
