@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 import { Form, Input, MutiLineInput, Button } from "../component/common";
 import { Wrapper, Container } from "../component/styles/styles";
 import { currentDate, getItem, setItem } from "../utils";
+import { useOnChange } from "../hooks";
 
 const PostWritePage = () => {
   const navigate = useNavigate();
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const postList = getItem("posts") ?? [];
+  const [title, handleChangeTitle] = useOnChange("");
+  const [content, handleChangeContent] = useOnChange("");
+  const postList = getItem("posts");
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -41,18 +42,11 @@ const PostWritePage = () => {
           }}
         />
         <Form onSubmit={onSubmit}>
-          <Input
-            value={title}
-            onChange={(event) => {
-              setTitle(event.target.value);
-            }}
-          />
+          <Input value={title} onChange={handleChangeTitle} />
           <MutiLineInput
             height={480}
             value={content}
-            onChange={(event) => {
-              setContent(event.target.value);
-            }}
+            onChange={handleChangeContent}
           />
           <Button title="글 작성하기" />
         </Form>

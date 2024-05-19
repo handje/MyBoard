@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Button, Input, Form } from "../component/common";
 import { Wrapper, Container } from "../component/styles/styles";
 import { CommentList } from "../component/comment";
-import { getItem, setItem } from "../utils/localStorage";
+import { getItem, setItem, findPost } from "../utils";
 
 const PostViewPage = () => {
   const navigate = useNavigate();
@@ -14,8 +14,7 @@ const PostViewPage = () => {
   const [newComment, setNewComment] = useState("");
 
   const postList = getItem("posts");
-  const postIndex = postList.findIndex((item) => item.id === id);
-  const post = postList[postIndex];
+  const { postIndex, post } = findPost(postList, id);
 
   const deletePost = () => {
     if (window.confirm("삭제하시겠습니까?")) {

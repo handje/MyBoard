@@ -2,7 +2,7 @@ export const getItem = (key) => {
   try {
     const getValue = localStorage.getItem(key);
     if (getValue === null) {
-      return undefined;
+      return [];
     }
     return JSON.parse(getValue);
   } catch (err) {

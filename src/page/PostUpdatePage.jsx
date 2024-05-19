@@ -1,20 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { Form, Input, MutiLineInput, Button } from "../component/common";
 import { Wrapper, Container } from "../component/styles/styles";
-import { currentDate, getItem, setItem } from "../utils";
+import { currentDate, getItem, setItem, findPost } from "../utils";
+import { useOnChange } from "../hooks";
 
 const PostUpdatePage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
   const postList = getItem("posts");
-  const postIndex = postList.findIndex((item) => item.id === id);
-  const post = postList[postIndex];
+  const { postIndex, post } = findPost(postList, id);
 
-  const [title, setTitle] = useState(post ? post.title : "");
-  const [content, setContent] = useState(post ? post.content : "");
+  const [title, handleChangeTitle] = useOnChange(post?.title);
+  const [content, handleChangeContent] = useOnChange(post?.content);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -43,18 +43,11 @@ const PostUpdatePage = () => {
           }}
         />
         <Form onSubmit={onSubmit}>
-          <Input
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-          />
+          <Input value={title} onChange={handleChangeTitle} />
           <MutiLineInput
             height={480}
             value={content}
-            onChange={(e) => {
-              setContent(e.target.value);
-            }}
+            onChange={handleChangeContent}
           />
           <Button title="글 수정하기" />
         </Form>
