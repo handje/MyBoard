@@ -1,42 +1,26 @@
 import React from "react";
 import styled from "styled-components";
 
-import { UserIcon } from "../common";
-
 const PostListItem = (props) => {
   const { comment } = props;
-  const loginUser = "guest";
   return (
-    <CommentContainer>
-      <UserIcon></UserIcon>
-      <Wrapper>
-        <UserName>{loginUser}</UserName>
-        <ContentText>{comment?.content}</ContentText>
-      </Wrapper>
-    </CommentContainer>
+    <Wrapper>
+      <ContentText>{comment?.content}</ContentText>
+    </Wrapper>
   );
 };
-const CommentContainer = styled.div`
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-`;
+
 const Wrapper = styled.div`
-  width: calc(100% - 60px);
-  padding: 10px;
+  width: 100%;
+  height: 70px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
   border: 1px solid grey;
   border-radius: 8px;
   background: white;
-`;
-const UserName = styled.p`
-  font-size: 20px;
-  font-weight: 500;
-  cursor: pointer;
-  margin: 0;
+  margin: 10px 0px;
+  padding: 5px 10px;
 `;
 const ContentText = styled.p`
   font-size: 16px;

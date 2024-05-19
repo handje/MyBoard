@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Input, Form } from "../common";
-import { getItem, setItem, findPost } from "../../utils";
+import { setItem } from "../../utils";
 
 const NewComment = ({ postList, postIndex, newComment, setNewComment }) => {
   const createComment = (e) => {

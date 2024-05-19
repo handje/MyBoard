@@ -1,8 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Form, Input, MutiLineInput, Button } from "../component/common";
+import { Button } from "../component/common";
 import { Wrapper, Container } from "../component/styles/styles";
+import { PostForm } from "../component/post";
 import { currentDate, getItem, setItem } from "../utils";
 import { useOnChange } from "../hooks";
 
@@ -45,15 +46,14 @@ const PostWritePage = () => {
             navigate("/");
           }}
         />
-        <Form onSubmit={onSubmit}>
-          <Input value={title} onChange={handleChangeTitle} />
-          <MutiLineInput
-            height={480}
-            value={content}
-            onChange={handleChangeContent}
-          />
-          <Button title="글 작성하기" />
-        </Form>
+        <PostForm
+          onSubmit={onSubmit}
+          title={title}
+          handleChangeTitle={handleChangeTitle}
+          content={content}
+          handleChangeContent={handleChangeContent}
+          buttonTitle={"글 작성하기"}
+        />
       </Container>
     </Wrapper>
   );

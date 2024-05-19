@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { Form, Input, MutiLineInput, Button } from "../component/common";
+import { Button } from "../component/common";
+import { PostForm } from "../component/post";
 import { Wrapper, Container } from "../component/styles/styles";
 import { currentDate, getItem, setItem, findPost } from "../utils";
 import { useOnChange } from "../hooks";
@@ -18,7 +19,14 @@ const PostUpdatePage = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (window.confirm("수정하시겠습니까?")) {
+    try {
+      if (!window.confirm("게시물을 수정하시겠습니까?")) {
+        return;
+      }
+      if (!title.length || !content.length) {
+        window.alert("내용을 입력해주세요.");
+        return;
+      }
       const updatePost = {
         id: id,
         title: title,
@@ -30,6 +38,8 @@ const PostUpdatePage = () => {
       postList.splice(postIndex, 1);
       setItem("posts", [...postList, updatePost]);
       navigate(`/post/${id}`);
+    } catch (error) {
+      throw new Error("게시물 등록 중 오류가 발생했습니다.");
     }
   };
 
@@ -42,15 +52,14 @@ const PostUpdatePage = () => {
             navigate(`/post/${id}`);
           }}
         />
-        <Form onSubmit={onSubmit}>
-          <Input value={title} onChange={handleChangeTitle} />
-          <MutiLineInput
-            height={480}
-            value={content}
-            onChange={handleChangeContent}
-          />
-          <Button title="글 수정하기" />
-        </Form>
+        <PostForm
+          onSubmit={onSubmit}
+          title={title}
+          handleChangeTitle={handleChangeTitle}
+          content={content}
+          handleChangeContent={handleChangeContent}
+          buttonTitle={"글 수정하기"}
+        />
       </Container>
     </Wrapper>
   );

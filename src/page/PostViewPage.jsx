@@ -42,14 +42,15 @@ const PostViewPage = () => {
           onClick={() => navigate(`/post/${id}/update`)}
         />
         <Button title="삭제하기" onClick={deletePost} />
-        <CommentLabel>댓글</CommentLabel>
-        <CommentList comments={post?.comments} />
-        <NewComment
-          newComment={newComment}
-          setNewComment={setNewComment}
-          postList={postList}
-          postIndex={postIndex}
-        />
+        <div>
+          <CommentList comments={post?.comments} />
+          <NewComment
+            newComment={newComment}
+            setNewComment={setNewComment}
+            postList={postList}
+            postIndex={postIndex}
+          />
+        </div>
       </Container>
     </Wrapper>
   );
@@ -74,11 +75,6 @@ const ContentText = styled.p`
   font-weight: 500;
   line-height: 32px;
   white-space: pre-wrap;
-`;
-
-const CommentLabel = styled.p`
-  font-size: 16px;
-  font-weight: 500;
 `;
 
 export default PostViewPage;
